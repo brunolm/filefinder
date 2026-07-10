@@ -1,0 +1,36 @@
+{
+  "name": "filefinder",
+  "version": "1.0.0",
+  "description": "Simple family file search",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:rust": "cargo build --release --manifest-path searcher/Cargo.toml",
+    "dist": "npm run build:rust && electron-builder --win"
+  },
+  "build": {
+    "appId": "com.brunolm.filefinder",
+    "productName": "File Finder",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "searcher/target/release/searcher.exe",
+        "to": "searcher.exe"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^26.15.3"
+  }
+}

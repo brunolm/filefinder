@@ -1,0 +1,235 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --border: #dde1ea;
+  --text: #1d2333;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: #dbeafe;
+  --hover: #f0f3f9;
+  --error: #b91c1c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161d;
+    --panel: #1e222c;
+    --border: #363d4d;
+    --text: #e5e8f0;
+    --muted: #9aa3b2;
+    --accent: #60a5fa;
+    --accent-hover: #3b82f6;
+    --accent-soft: #1e3356;
+    --hover: #272d3b;
+    --error: #f87171;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-size: 15px;
+}
+
+header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-row {
+  display: flex;
+  gap: 8px;
+}
+
+#query {
+  flex: 1;
+  font-size: 18px;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+#query:focus { border-color: var(--accent); }
+
+button {
+  font-size: 15px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+button:hover { background: var(--hover); }
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 24px;
+}
+button.primary:hover { background: var(--accent-hover); }
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+.chip.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.field select, .field input[type="date"] {
+  font-size: 14px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.spacer { flex: 1; }
+
+.folder-field button {
+  max-width: 340px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.checkbox {
+  color: var(--muted);
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-btn {
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+#settings-modal {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--text);
+  padding: 24px;
+  min-width: 300px;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+#settings-modal[open] { display: flex; }
+#settings-modal::backdrop { background: rgba(0, 0, 0, 0.45); }
+
+#settings-modal h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+#settings-modal .field {
+  justify-content: space-between;
+}
+#settings-modal .field select { min-width: 160px; }
+
+main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 20px 20px;
+}
+
+.status {
+  color: var(--muted);
+  padding: 8px 2px;
+  font-size: 14px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+}
+.status.error { color: var(--error); font-weight: 600; }
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.result:hover { border-color: var(--accent); }
+
+.result .icon {
+  font-size: 26px;
+  width: 48px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.result .thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.result .info {
+  flex: 1;
+  min-width: 0;
+}
+.result .name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.result .meta {
+  color: var(--muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result .actions button {
+  font-size: 13px;
+  padding: 6px 10px;
+}

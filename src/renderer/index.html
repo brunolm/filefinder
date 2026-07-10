@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:" />
+  <title>File Finder</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="search-row">
+      <input id="query" type="text" data-i18n-placeholder="searchPlaceholder" autofocus />
+      <button id="search-btn" class="primary" data-i18n="search"></button>
+      <button id="cancel-btn" data-i18n="stop" hidden></button>
+    </div>
+
+    <div class="filter-row" id="categories">
+      <button class="chip active" data-category="all" data-i18n="catAll"></button>
+      <button class="chip" data-category="image" data-i18n="catImages"></button>
+      <button class="chip" data-category="video" data-i18n="catVideos"></button>
+      <button class="chip" data-category="document" data-i18n="catDocuments"></button>
+      <button class="chip" data-category="audio" data-i18n="catAudio"></button>
+      <button class="chip" data-category="archive" data-i18n="catArchives"></button>
+      <button class="chip" data-category="folder" data-i18n="catFolders"></button>
+    </div>
+
+    <div class="filter-row">
+      <label class="field">
+        <span data-i18n="whenChanged"></span>
+        <select id="date-preset">
+          <option value="any" data-i18n="anyTime"></option>
+          <option value="7" data-i18n="pastWeek"></option>
+          <option value="30" data-i18n="pastMonth"></option>
+          <option value="365" data-i18n="pastYear"></option>
+          <option value="custom" data-i18n="pickDates"></option>
+        </select>
+      </label>
+      <span id="custom-dates" hidden>
+        <label class="field"><span data-i18n="from"></span><input id="date-from" type="date" /></label>
+        <label class="field"><span data-i18n="to"></span><input id="date-to" type="date" /></label>
+      </span>
+
+      <span class="spacer"></span>
+
+      <label class="field folder-field">
+        <span data-i18n="searchIn"></span>
+        <button id="folder-btn"><span id="folder-label"></span> 📁</button>
+      </label>
+      <label class="checkbox">
+        <input id="include-hidden" type="checkbox" /> <span data-i18n="includeHidden"></span>
+      </label>
+      <button id="settings-btn" class="icon-btn" data-i18n-title="settings">⚙️</button>
+    </div>
+  </header>
+
+  <dialog id="settings-modal">
+    <h2 data-i18n="settings"></h2>
+    <label class="field">
+      <span data-i18n="theme"></span>
+      <select id="theme">
+        <option value="system" data-i18n="themeSystem"></option>
+        <option value="light" data-i18n="themeLight"></option>
+        <option value="dark" data-i18n="themeDark"></option>
+      </select>
+    </label>
+    <label class="field">
+      <span data-i18n="language"></span>
+      <select id="language">
+        <option value="en-US">English (US)</option>
+        <option value="pt-BR">Português (BR)</option>
+      </select>
+    </label>
+    <button id="settings-close" class="primary" data-i18n="close"></button>
+  </dialog>
+
+  <main>
+    <div id="status" class="status"></div>
+    <div id="results"></div>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
