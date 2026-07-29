@@ -20,6 +20,7 @@ function createWindow() {
     minWidth: 760,
     minHeight: 500,
     autoHideMenuBar: true,
+    icon: path.join(__dirname, 'assets', 'icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -28,6 +29,9 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  if (process.platform === 'win32') {
+    app.setAppUserModelId('com.brunolm.filefinder');
+  }
   registerIpc();
   createWindow();
   app.on('activate', () => {
